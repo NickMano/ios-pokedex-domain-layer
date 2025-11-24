@@ -6,7 +6,7 @@
 //
 
 public struct PokemonResponse: Codable {
-    let next: String
+    let next: String?
     public let pokemons: [NameUrl]
     
     enum CodingKeys: String, CodingKey {

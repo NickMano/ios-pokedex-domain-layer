@@ -16,7 +16,7 @@ public final class DefaultSearchPokemonsUseCase: SearchPokemonsUseCase {
         self.pokemonRepository = pokemonRepository
     }
     
-    public func execute() async throws -> [Pokemon] {
-        return try await pokemonRepository.fetchPokemons()
+    public func execute(limit: Int = 100, offset: Int = 0) async throws -> [Pokemon] {
+        return try await pokemonRepository.fetchPokemons(limit: limit, offset: offset)
     }
 }
