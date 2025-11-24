@@ -7,13 +7,13 @@
 
 import Foundation
 
-public struct Pokemon: Codable {
+public struct Pokemon: Codable, Equatable, Hashable, Identifiable {
     private let sprites: Sprites
     public let types: [PokeType]
     public let species: NameUrl
     
     public let name: String
-    public let identifier: Int
+    public let id: Int
     public let height: Int
     public let weight: Int
     public let abilities: [Ability]
@@ -25,7 +25,7 @@ public struct Pokemon: Codable {
         case types
         case species
         case name
-        case identifier = "id"
+        case id
         case height
         case weight
         case abilities
@@ -38,7 +38,7 @@ public struct Pokemon: Codable {
         types = []
         species = NameUrl(name: "", url: "")
         name = ""
-        identifier = 0
+        id = 0
         height = 0
         weight = 0
         abilities = []
@@ -51,7 +51,7 @@ public struct Pokemon: Codable {
     }
     
     public var numberFormatted: String {
-        let number = String(format: "%03d", identifier)
+        let number = String(format: "%03d", id)
         return "#\(number)"
     }
     
@@ -60,38 +60,6 @@ public struct Pokemon: Codable {
     }
 }
 
-struct Sprites: Codable {
-    let other: OtherSprite
-}
-
-struct OtherSprite: Codable {
-    let artwork: ArtworkSprite
-    
-    enum CodingKeys: String, CodingKey {
-        case artwork = "official-artwork"
-    }
-}
-
-struct ArtworkSprite: Codable {
-    let imageUrl: String
-    
-    enum CodingKeys: String, CodingKey {
-        case imageUrl = "front_default"
-    }
-}
-
-public struct PokeType: Codable {
+public struct PokeType: Codable, Equatable, Hashable {
     public let type: NameUrl
-}
-
-public struct Stat: Codable {
-    public let baseStat: Int
-    public let effort: Int
-    public let stat: NameUrl
-    
-    enum CodingKeys: String, CodingKey {
-        case baseStat = "base_stat"
-        case effort
-        case stat
-    }
 }
