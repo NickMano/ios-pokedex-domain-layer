@@ -6,7 +6,7 @@
 //
 
 public protocol SearchPokemonsUseCase {
-    func execute() async throws -> [Pokemon]
+    func execute(limit: Int, offset: Int) async throws -> [Pokemon]
 }
 
 public final class DefaultSearchPokemonsUseCase: SearchPokemonsUseCase {
